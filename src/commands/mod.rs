@@ -1,18 +1,21 @@
 mod image;
+mod moderation;
 mod help;
-
-use serenity::framework::StandardFramework;
+use serenity::{client::Context, framework::{StandardFramework, standard::{DispatchError, macros::hook}}, model::channel::Message};
 
 pub fn configure_commands() -> StandardFramework {
     StandardFramework::new()
         .configure(|c| c
             .prefix("s.")
-            // .dynamic_prefix(async |context, message| {
-            //     let data = context.data.write().await;
-            //     data.insert<&str>()
-            // })
             .case_insensitivity(true)
         )
         .group(&image::IMAGE_GROUP)
+        .group(&moderation::MODERATION_GROUP)
         .help(&help::HELP_CMD)
+        .on_dispatch_error(error_hook)
+}
+
+#[hook]
+async fn error_hook(_: &Context, _: &Message, error: DispatchError) {
+    println!("{:?}", error);
 }
