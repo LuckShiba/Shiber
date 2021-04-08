@@ -1,6 +1,7 @@
 mod commands;
 mod events;
 pub mod constants;
+pub mod utils;
 
 use dotenv::dotenv;
 use events::Events;
