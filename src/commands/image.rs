@@ -10,6 +10,7 @@ use crate::constants;
 pub struct Image;
 
 #[command]
+#[description("A shiba picture.")]
 async fn shiba(ctx: &Context, msg: &Message) -> CommandResult {
     let images = get_shiba_images(1).await?;
     msg.channel_id
@@ -22,6 +23,7 @@ async fn shiba(ctx: &Context, msg: &Message) -> CommandResult {
 }
 
 #[command]
+#[description("Five shiba pictures.")]
 #[aliases("shibabomb")]
 async fn bomb(ctx: &Context, msg: &Message) -> CommandResult {
     let images = get_shiba_images(5).await?;

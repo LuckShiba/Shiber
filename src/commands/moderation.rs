@@ -9,6 +9,7 @@ use crate::utils::mention_or_id;
 pub struct Moderation;
 
 #[command]
+#[description("Kicks a member.")]
 async fn kick(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
     let author = msg.member(ctx).await?;
     let guild = msg.guild_id.unwrap();
