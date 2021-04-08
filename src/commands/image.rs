@@ -1,5 +1,7 @@
-use reqwest::Error;
+use std::error::Error;
+
 use serenity::{client::Context, framework::standard::{CommandResult, macros::{command, group}}, model::channel::Message, utils::Colour};
+use isahc::prelude::AsyncReadResponseExt;
 use crate::constants;
 
 #[group]
@@ -30,9 +32,9 @@ async fn bomb(ctx: &Context, msg: &Message) -> CommandResult {
     Ok(())
 } 
 
-async fn get_shiba_images(count: i8) -> Result<Vec<String>, Error> {
+async fn get_shiba_images(count: i8) -> Result<Vec<String>, Box<dyn Error + Send + Sync>> {
     Ok(
-        reqwest::get(&format!("https://shibe.online/api/shibes?count={}", count)[..])
+        isahc::get_async(&format!("https://shibe.online/api/shibes?count={}", count)[..])
             .await?
             .json::<Vec<String>>()
             .await?
