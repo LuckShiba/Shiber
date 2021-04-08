@@ -3,6 +3,7 @@ use serenity::{client::Context, framework::standard::{CommandResult, macros::{co
 use crate::constants;
 
 #[group]
+#[summary("Commands with images.")]
 #[commands(shiba, bomb)]
 pub struct Image;
 
