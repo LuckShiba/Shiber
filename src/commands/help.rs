@@ -18,7 +18,13 @@ async fn help_cmd(
             groups
             .into_iter()
             .map(|group| (
-                group.name, format!("`{}`",
+                format!(
+                    "{}: `{}`",
+                    group.name,
+                    group.options.summary
+                        .unwrap_or("No description.")
+                ),
+                format!("`{}`",
                     group.options.commands
                         .into_iter()
                         .map(|command| command.options.names
