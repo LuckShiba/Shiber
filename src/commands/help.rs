@@ -52,20 +52,21 @@ async fn help_cmd(
             }
         }
         if let Some(cmd) = cmd {
-            let (name, aliases) = cmd.options.names.split_first()?;
-            embed.title(
-                format!(
-                    "{}: `{}`",
-                    name,
-                    cmd.options.desc
-                        .unwrap_or("No description.")
-                )
-            );
-            let mut description = String::new();
-            if aliases.len() != 0 {
-                description += &format!("**Aliases:** `{}`\n", aliases.join("`, `"));
+            if let Some((name, aliases)) = cmd.options.names.split_first() {
+                embed.title(
+                    format!(
+                        "{}: `{}`",
+                        name,
+                        cmd.options.desc
+                            .unwrap_or("No description.")
+                    )
+                );
+                let mut description = String::new();
+                if aliases.len() != 0 {
+                    description += &format!("**Aliases:** `{}`\n", aliases.join("`, `"));
+                }
+                embed.description(description);
             }
-            embed.description(description);
         } else {
             embed.title("Command not found.");
         }
