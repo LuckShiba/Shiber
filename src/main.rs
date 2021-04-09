@@ -28,5 +28,5 @@ async fn main() {
 
     if let Err(why) = client.start().await {
         println!("Error durring starting client: {:?}", why);
-}
+    }
 }
