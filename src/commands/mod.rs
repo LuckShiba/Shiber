@@ -1,5 +1,4 @@
 mod image;
-mod moderation;
 mod help;
 use serenity::{client::Context, framework::{StandardFramework, standard::{DispatchError, macros::hook}}, model::channel::Message};
 
@@ -10,7 +9,6 @@ pub fn configure_commands() -> StandardFramework {
             .case_insensitivity(true)
         )
         .group(&image::IMAGE_GROUP)
-        .group(&moderation::MODERATION_GROUP)
         .help(&help::HELP_CMD)
         .on_dispatch_error(error_hook)
 }
