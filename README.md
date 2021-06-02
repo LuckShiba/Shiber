@@ -1,0 +1,2 @@
+# Shiber
+Discord bot
