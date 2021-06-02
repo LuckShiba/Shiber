@@ -1,0 +1,52 @@
+
+# Based from Twilight's Lint workflow.
+#
+# https://github.com/twilight-rs/twilight/blob/trunk/.github/workflows/lint.yml
+name: Rust
+
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build
+        run: cargo build --verbose
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - run: rustup component add clippy
+      
+      - name: Run clippy 
+        uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+  rustmt:
+    name: Format
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions-rs/toolchain@v1
+        with:
+          components: rustfmt
+          profile: minimal
+          override: true
+      
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
+    
+  
+
