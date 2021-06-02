@@ -1,1 +1,1 @@
-pub const EMBED_COLOR: u32 = 0xF0BC60;
+pub const EMBED_COLOR: i32 = 0xF0BC60;

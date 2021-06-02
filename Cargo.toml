@@ -1,17 +1,31 @@
 [package]
 name = "shiber"
 version = "0.1.0"
-authors = ["LuckShiba <luckshiba@protonmail.com>"]
+authors = ["LuckShiba <LuckShiba@protonmail.com>"]
 edition = "2018"
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [dependencies]
-serenity = "^0.10.5"
 dotenv = "^0.15.0"
 
 [dependencies.tokio]
-version = "1"
-features = ["macros", "rt-multi-thread"]
+version = "^1.6.1"
+features = ["rt-multi-thread", "macros"]
+
+[dependencies.serenity]
+git = "https://github.com/HarmoGlace/serenity"
+branch = "dropdowns"
+default-features = false
+features = [
+    "client",
+    "gateway",
+    "rustls_backend",
+    "model",
+    "unstable_discord_api",
+    "collector",
+]
 
 [dependencies.isahc]
-version = "^1.3.0"
+version = "^1.4.0"
 features = ["json"]
